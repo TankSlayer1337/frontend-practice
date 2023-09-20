@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { QuoteData } from '../quote-data';
+import { QuoteData } from './quote-data';
 
 const StoicQuote = () => {
   const [quoteData, setQuoteData] = useState<QuoteData | undefined>(undefined);

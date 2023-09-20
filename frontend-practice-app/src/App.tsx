@@ -1,8 +1,34 @@
 import reactLogo from './assets/react.svg'
 import './App.css'
 import StoicQuote from './stoic-quote/StoicQuote'
+import RandomDuck from './random-duck/RandomDuck'
+import Inception from './inception/Inception'
+import Home from './home/Home'
+import { useState } from 'react'
+
+enum Content {
+  Home,
+  StoicQuote,
+  RandomDuck,
+  Inception
+}
 
 function App() {
+  const [content, setContent] = useState<Content>(Content.Home);
+
+  const renderContent = (content: Content) => {
+    switch(content) {
+      case Content.StoicQuote:
+        return <StoicQuote></StoicQuote>;
+      case Content.RandomDuck:
+        return <RandomDuck></RandomDuck>;
+      case Content.Inception:
+        return <Inception></Inception>;
+      default:
+        return <Home></Home>;
+    }
+  }
+
   return (
     <>
       <div>
@@ -11,15 +37,16 @@ function App() {
         </a>
       </div>
       <h1>Frontend Practice</h1>
-      <p>
-        This is a place for me to improve my frontend skills. Checkout the <a href="https://github.com/TankSlayer1337/frontend-practice">source code</a>.
-      </p>
-      <h2>Resources</h2>
-      <p>
-        <a href='https://github.com/public-apis/public-apis'>This list</a> of public, free to use APIs have been very useful in adding fun content to this website.
-      </p>
+      <div>
+        <ul>
+          <li><button onClick={() => setContent(Content.Home)}>Home</button></li>
+          <li><button onClick={() => setContent(Content.StoicQuote)}>Stoic Quotes</button></li>
+          <li><button onClick={() => setContent(Content.RandomDuck)}>Ducks</button></li>
+          <li><button onClick={() => setContent(Content.Inception)}>Inception</button></li>
+        </ul>
+      </div>
 
-      <StoicQuote></StoicQuote>
+      {renderContent(content)}
     </>
   )
 }
