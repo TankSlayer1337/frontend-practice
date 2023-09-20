@@ -6,28 +6,8 @@ import Inception from './inception/Inception'
 import Home from './home/Home'
 import { useState } from 'react'
 
-enum Content {
-  Home,
-  StoicQuote,
-  RandomDuck,
-  Inception
-}
-
 function App() {
-  const [content, setContent] = useState<Content>(Content.Home);
-
-  const renderContent = (content: Content) => {
-    switch(content) {
-      case Content.StoicQuote:
-        return <StoicQuote></StoicQuote>;
-      case Content.RandomDuck:
-        return <RandomDuck></RandomDuck>;
-      case Content.Inception:
-        return <Inception></Inception>;
-      default:
-        return <Home></Home>;
-    }
-  }
+  const [content, setContent] = useState<JSX.Element>(<Home></Home>);
 
   return (
     <>
@@ -39,14 +19,14 @@ function App() {
       <h1>Frontend Practice</h1>
       <div>
         <ul>
-          <li><button onClick={() => setContent(Content.Home)}>Home</button></li>
-          <li><button onClick={() => setContent(Content.StoicQuote)}>Stoic Quotes</button></li>
-          <li><button onClick={() => setContent(Content.RandomDuck)}>Ducks</button></li>
-          <li><button onClick={() => setContent(Content.Inception)}>Inception</button></li>
+          <li><button onClick={() => setContent(<Home></Home>)}>Home</button></li>
+          <li><button onClick={() => setContent(<StoicQuote></StoicQuote>)}>Stoic Quotes</button></li>
+          <li><button onClick={() => setContent(<RandomDuck></RandomDuck>)}>Ducks</button></li>
+          <li><button onClick={() => setContent(<Inception></Inception>)}>Inception</button></li>
         </ul>
       </div>
 
-      {renderContent(content)}
+      {content}
     </>
   )
 }
