@@ -1,10 +1,15 @@
+import './RandomDuck.css';
+
 import { useState, useEffect } from 'react';
 import { DuckData } from './duck-data';
+import Spinner from '../spinner/Spinner';
 
 const RandomDuck = () => {
   const [duckData, setDuckData] = useState<DuckData | undefined>(undefined);
+  const [awaitingResponse, setAwaitingResponse] = useState<boolean>(true);
 
   const fetchDuck = async () => {
+    setAwaitingResponse(true);
     try {
       const url = 'https://corsproxy.io/?' + encodeURIComponent('https://random-d.uk/api/v2/quack');
       const response = await fetch(url, {
@@ -20,6 +25,8 @@ const RandomDuck = () => {
     } catch (error) {
       console.error('Error: ', error);
     }
+
+    setAwaitingResponse(false);
   }
 
   useEffect(() => {
@@ -31,10 +38,10 @@ const RandomDuck = () => {
       <h2>Random Duck</h2>
       <p>Courtesy of Geoffrey Westhoff</p>
       <button onClick={fetchDuck}>New duck</button>
-      {duckData &&
+      {awaitingResponse ? <Spinner></Spinner> :
         <div>
-          <img src={duckData.url} alt='Duck'></img>
-          <p>{duckData.message}</p>
+          <img src={duckData?.url} alt='Duck' className='duck-image'></img>
+          <p>{duckData?.message}</p>
         </div>
       }
     </div>
