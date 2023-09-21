@@ -1,3 +1,5 @@
+import './Inception.css';
+
 const Inception = () => {
   return (
     <div>
