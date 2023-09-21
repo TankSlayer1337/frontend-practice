@@ -34,13 +34,13 @@ const StoicQuote = () => {
     <div>
       <h2>Stoic Quote</h2>
       <p>Courtesy of <a href='https://github.com/tlcheah2/stoic-quote-lambda-public-api'>Tek Loon</a></p>
+      <button onClick={fetchQuote}>New quote</button>
       {awaitingResponse ? <Spinner></Spinner> :
         <div>
           <q>{quoteData?.quote}</q>
           <p>{quoteData?.author}</p>
         </div>
       }
-      <button onClick={fetchQuote}>New quote</button>
     </div>
   );
 }
