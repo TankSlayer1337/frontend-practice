@@ -1,3 +1,5 @@
+import './RandomDuck.css';
+
 import { useState, useEffect } from 'react';
 import { DuckData } from './duck-data';
 import Spinner from '../spinner/Spinner';
@@ -27,10 +29,6 @@ const RandomDuck = () => {
     setAwaitingResponse(false);
   }
 
-  function delay(time: number) {
-    return new Promise(resolve => setTimeout(resolve, time));
-  }
-
   useEffect(() => {
     fetchDuck();
   }, []);
@@ -42,7 +40,7 @@ const RandomDuck = () => {
       <button onClick={fetchDuck}>New duck</button>
       {awaitingResponse ? <Spinner></Spinner> :
         <div>
-          <img src={duckData?.url} alt='Duck'></img>
+          <img src={duckData?.url} alt='Duck' className='duck-image'></img>
           <p>{duckData?.message}</p>
         </div>
       }
